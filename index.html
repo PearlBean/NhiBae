@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Nhi ơi, Sang xin lỗi mà!</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Nunito"', 'sans-serif'],
+            hand: ['"Patrick Hand"', 'cursive']
+          },
+          colors: {
+            blush: '#fff1f5',
+            roseink: '#c7476d',
+            softpink: '#ffdbe7'
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Patrick+Hand&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+
+      background:
+        radial-gradient(
+          circle at 12% 18%,
+          rgba(255,255,255,.85) 0 5rem,
+          transparent 5.1rem
+        ),
+        radial-gradient(
+          circle at 88% 82%,
+          rgba(255,255,255,.75) 0 7rem,
+          transparent 7.1rem
+        ),
+        linear-gradient(
+          135deg,
+          #dff7f4 0%,
+          #fff0f5 48%,
+          #fff8e8 100%
+        );
+    }
+
+    /* ==========================================
+       BÓNG
+       ========================================== */
+
+    .paper-shadow {
+      box-shadow:
+        0 24px 70px rgba(177,111,132,.18),
+        0 5px 16px rgba(177,111,132,.08);
+    }
+
+    /* ==========================================
+       TRANG TRÍ
+       ========================================== */
+
+    .float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .float-delay {
+      animation: float 4.8s .7s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform:
+          translateY(0)
+          rotate(-4deg);
+      }
+
+      50% {
+        transform:
+          translateY(-10px)
+          rotate(4deg);
+      }
+
+    }
+
+    /* ==========================================
+       SUCCESS
+       ========================================== */
+
+    @keyframes pop {
+
+      0% {
+        transform: scale(.85);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+    }
+
+    .success-state {
+      animation:
+        pop .45s
+        cubic-bezier(.2,.8,.2,1)
+        both;
+    }
+
+    /* ==========================================
+       BỨC THƯ RESPONSIVE
+       ========================================== */
+
+    #card {
+
+      position: relative;
+
+      /*
+       * Chiều rộng tự co giãn.
+       */
+      width: min(
+        92vw,
+        590px
+      );
+
+      /*
+       * Không cố định chiều cao.
+       * Nội dung tự quyết định chiều cao.
+       */
+      min-height: 0;
+
+      /*
+       * Không bị tràn ngang.
+       */
+      overflow: visible;
+    }
+
+    /* ==========================================
+       ẢNH MÈO
+       ========================================== */
+
+    .cat-wrapper {
+
+      /*
+       * Desktop: 160px
+       * Mobile: tự nhỏ theo màn hình
+       */
+      width: clamp(
+        110px,
+        28vw,
+        160px
+      );
+
+      height: clamp(
+        110px,
+        28vw,
+        160px
+      );
+    }
+
+    /* ==========================================
+       KHU VỰC NÚT
+       ========================================== */
+
+    #buttonArea {
+
+      position: relative;
+
+      width: 100%;
+
+      /*
+       * Tự co theo màn hình.
+       *
+       * Desktop khoảng 190px
+       * Mobile khoảng 155px
+       */
+      height: clamp(
+        155px,
+        28vw,
+        190px
+      );
+
+      margin-top: clamp(
+        18px,
+        4vw,
+        28px
+      );
+
+      /*
+       * Không cho vùng nút tràn ngang.
+       */
+      overflow: hidden;
+
+      border-radius: 25px;
+    }
+
+    /* ==========================================
+       NÚT THA LỖI
+       ========================================== */
+
+    #yesButton {
+
+      position: absolute;
+
+      left: 50%;
+      top: 18px;
+
+      transform:
+        translateX(-50%);
+
+      z-index: 10;
+
+      white-space: nowrap;
+
+      /*
+       * Kích thước tự co.
+       */
+      padding:
+        clamp(10px, 2vw, 13px)
+        clamp(18px, 4vw, 26px);
+
+      font-size:
+        clamp(13px, 2.5vw, 16px);
+    }
+
+    /* ==========================================
+       NÚT KHÔNG ĐỒNG Ý
+       ========================================== */
+
+    #noButton {
+
+      position: absolute;
+
+      left: 50%;
+      top: 125px;
+
+      transform:
+        translate(-50%, -50%);
+
+      transition:
+        left .35s ease,
+        top .35s ease,
+        transform .35s ease;
+
+      z-index: 20;
+
+      white-space: nowrap;
+
+      /*
+       * Tự co.
+       */
+      padding:
+        clamp(8px, 1.8vw, 10px)
+        clamp(13px, 3vw, 17px);
+
+      font-size:
+        clamp(11px, 2.2vw, 14px);
+    }
+
+    /* ==========================================
+       TRÁI TIM
+       ========================================== */
+
+    .heart {
+
+      position: fixed;
+
+      pointer-events: none;
+
+      animation:
+        rise 2.2s ease-out forwards;
+
+      z-index: 100;
+    }
+
+    @keyframes rise {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translateY(10px)
+          scale(.6)
+          rotate(0);
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translateY(-110px)
+          scale(1.25)
+          rotate(18deg);
+      }
+
+    }
+
+    /* ==========================================
+       ĐIỆN THOẠI NHỎ
+       ========================================== */
+
+    @media (max-width: 480px) {
+
+      #card {
+        width: calc(100vw - 24px);
+        border-radius: 1.7rem;
+      }
+
+      #buttonArea {
+        height: 155px;
+      }
+
+      #noButton {
+        top: 120px;
+      }
+
+    }
+
+    /* ==========================================
+       ĐIỆN THOẠI RẤT NHỎ
+       ========================================== */
+
+    @media (max-width: 360px) {
+
+      #card {
+        width: calc(100vw - 16px);
+      }
+
+      #buttonArea {
+        height: 145px;
+      }
+
+      #noButton {
+        top: 112px;
+      }
+
+    }
+
+    /* ==========================================
+       MÀN HÌNH THẤP
+       ========================================== */
+
+    @media (max-height: 700px) {
+
+      main {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+      }
+
+      #card {
+        padding-top: 28px !important;
+        padding-bottom: 28px !important;
+      }
+
+      .cat-wrapper {
+        margin-bottom: 20px !important;
+      }
+
+      #buttonArea {
+        height: 145px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body class="font-display text-slate-700">
+
+  <!-- ==========================================
+       MAIN
+       ========================================== -->
+
+  <main
+    class="
+      relative
+      flex
+      min-h-screen
+      items-center
+      justify-center
+      px-3
+      py-6
+      sm:px-5
+      sm:py-10
+    "
+  >
+
+    <!-- Trang trí -->
+
+    <span
+      class="
+        float
+        absolute
+        left-[5%]
+        top-[13%]
+        select-none
+        text-3xl
+        opacity-70
+      "
+    >
+      ♡
+    </span>
+
+    <span
+      class="
+        float-delay
+        absolute
+        right-[7%]
+        top-[20%]
+        select-none
+        text-2xl
+        text-rose-300
+        opacity-80
+      "
+    >
+      ✦
+    </span>
+
+    <span
+      class="
+        float-delay
+        absolute
+        bottom-[14%]
+        left-[10%]
+        select-none
+        text-2xl
+        opacity-60
+      "
+    >
+      ♡
+    </span>
+
+    <span
+      class="
+        float
+        absolute
+        bottom-[11%]
+        right-[11%]
+        select-none
+        text-3xl
+        text-teal-300
+        opacity-70
+      "
+    >
+      ✿
+    </span>
+
+
+    <!-- ==========================================
+         BỨC THƯ
+         ========================================== -->
+
+    <section
+      id="card"
+      class="
+        paper-shadow
+        relative
+
+        rounded-[2rem]
+
+        border
+        border-white/80
+
+        bg-white/90
+
+        px-5
+        py-8
+
+        text-center
+
+        backdrop-blur
+
+        sm:px-10
+        sm:py-10
+      "
+    >
+
+      <!-- Thanh màu -->
+
+      <div
+        class="
+          absolute
+          inset-x-0
+          top-0
+          h-2
+
+          rounded-t-[2rem]
+
+          bg-gradient-to-r
+          from-teal-300
+          via-pink-300
+          to-amber-200
+        "
+      ></div>
+
+
+      <!-- ==========================================
+           GIF MÈO
+           ========================================== -->
+
+      <div
+        class="
+          cat-wrapper
+
+          mx-auto
+          mb-6
+
+          flex
+          items-center
+          justify-center
+
+          overflow-hidden
+
+          rounded-full
+
+          border-8
+          border-pink-50
+
+          bg-pink-50
+
+          shadow-inner
+        "
+      >
+
+        <img
+          class="
+            h-full
+            w-full
+            object-cover
+          "
+
+          src="https://media.tenor.com/2roX3uxz_68AAAAC/cat-crying.gif"
+
+          alt="Một chú mèo hoạt hình đang rơi nước mắt xin lỗi"
+
+          onerror="
+            this.style.display='none';
+            this.nextElementSibling.style.display='block';
+          "
+        >
+
+        <span
+          class="
+            hidden
+            text-6xl
+            sm:text-7xl
+          "
+          aria-hidden="true"
+        >
+          🥺
+        </span>
+
+      </div>
+
+
+      <!-- ==========================================
+           NỘI DUNG
+           ========================================== -->
+
+      <div id="apologyContent">
+
+        <!-- Tiêu đề nhỏ -->
+
+        <p
+          class="
+            mb-2
+
+            font-hand
+
+            text-lg
+            sm:text-xl
+
+            text-rose-400
+          "
+        >
+          Một lá thư nhỏ gửi Nhi
+        </p>
+
+
+        <!-- Tiêu đề -->
+
+        <h1
+          class="
+            mx-auto
+
+            max-w-lg
+
+            text-[clamp(28px,7vw,44px)]
+
+            font-black
+
+            leading-[1.1]
+
+            text-roseink
+          "
+        >
+          Nhi ơi, Sang xin lỗi mà! 🥺
+        </h1>
+
+
+        <!-- Nội dung -->
+
+        <p
+          class="
+            mx-auto
+
+            mt-5
+            sm:mt-6
+
+            max-w-lg
+
+            text-[clamp(15px,3.5vw,18px)]
+
+            font-semibold
+
+            leading-7
+            sm:leading-8
+
+            text-slate-500
+          "
+        >
+          Sang vụng ăn nói qua tin nhắn quá làm Nhi buồn.
+          Sang hong cố ý đâu, Nhi đừng giận Sang nữa nha!
+          Sang sẽ cố gắng nhắn tin ổn hơn để Nhi vui nha ♡
+        </p>
+
+
+        <!-- ==========================================
+             TIẾNG TRUNG
+             ========================================== -->
+
+        <p
+          class="
+            mt-6
+            sm:mt-7
+
+            font-hand
+
+            text-[clamp(28px,7vw,36px)]
+
+            text-teal-500
+          "
+        >
+
+          对不起
+
+          <span
+            class="
+              text-[clamp(16px,4vw,20px)]
+              text-slate-400
+            "
+          >
+            (Duìbuqǐ)
+          </span>
+
+        </p>
+
+
+        <!-- ==========================================
+             KHU VỰC NÚT
+             ========================================== -->
+
+        <div id="buttonArea">
+
+          <!-- NÚT THA LỖI -->
+
+          <button
+            id="yesButton"
+
+            type="button"
+
+            class="
+              rounded-full
+
+              bg-roseink
+
+              font-extrabold
+              text-white
+
+              shadow-lg
+              shadow-rose-200
+
+              transition
+
+              hover:-translate-y-1
+              hover:bg-rose-600
+              hover:shadow-xl
+
+              focus:outline-none
+              focus:ring-4
+              focus:ring-pink-200
+            "
+          >
+            Tha lỗi cho Sang ❤️
+          </button>
+
+
+          <!-- NÚT KHÔNG ĐỒNG Ý -->
+
+          <button
+            id="noButton"
+
+            type="button"
+
+            class="
+              rounded-full
+
+              border-2
+              border-slate-200
+
+              bg-white
+
+              font-bold
+              text-slate-500
+
+              shadow-sm
+
+              transition
+
+              hover:border-pink-200
+              hover:bg-pink-50
+            "
+          >
+            Không đồng ý 😢
+          </button>
+
+        </div>
+
+
+        <!-- ==========================================
+             LỜI HỨA
+             ========================================== -->
+
+        <p
+          class="
+            mt-1
+
+            text-[11px]
+            sm:text-xs
+
+            font-semibold
+
+            text-slate-400
+          "
+        >
+          Sang hứa sẽ nói chuyện dịu dàng hơn đó ♡
+        </p>
+
+      </div>
+
+
+      <!-- ==========================================
+           SUCCESS
+           ========================================== -->
+
+      <div
+        id="successContent"
+
+        class="
+          success-state
+          hidden
+
+          py-10
+          sm:py-12
+        "
+      >
+
+        <div
+          class="
+            mb-5
+            text-6xl
+            sm:text-7xl
+          "
+        >
+          🥰
+        </div>
+
+
+        <h2
+          class="
+            text-3xl
+            font-black
+            leading-tight
+            text-roseink
+          "
+        >
+          Yayyy!
+        </h2>
+
+
+        <p
+          class="
+            mx-auto
+            mt-4
+
+            max-w-sm
+
+            text-base
+            sm:text-lg
+
+            font-bold
+
+            leading-7
+            sm:leading-8
+
+            text-slate-500
+          "
+        >
+          Cảm ơn Nhi nhìu nhìu 🥰
+          <br>
+          Để Sang bù đắp cho Nhi nha!
+        </p>
+
+
+        <p
+          class="
+            mt-6
+
+            font-hand
+
+            text-xl
+            sm:text-2xl
+
+            text-teal-500
+          "
+        >
+          Thương Nhi nhiều lắm ♡
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ==========================================
+       CONFETTI
+       ========================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"
+  ></script>
+
+
+  <script>
+
+    const buttonArea =
+      document.getElementById('buttonArea');
+
+    const yesButton =
+      document.getElementById('yesButton');
+
+    const noButton =
+      document.getElementById('noButton');
+
+    const apologyContent =
+      document.getElementById('apologyContent');
+
+    const successContent =
+      document.getElementById('successContent');
+
+
+    /* ==========================================
+       NÚT KHÔNG ĐỒNG Ý NÉ
+       ========================================== */
+
+    function moveNoButton() {
+
+      /*
+       * Lấy kích thước thật của vùng nút.
+       */
+
+      const areaWidth =
+        buttonArea.clientWidth;
+
+      const areaHeight =
+        buttonArea.clientHeight;
+
+
+      /*
+       * Kích thước thật của nút.
+       */
+
+      const buttonWidth =
+        noButton.offsetWidth;
+
+      const buttonHeight =
+        noButton.offsetHeight;
+
+
+      /*
+       * Khoảng cách an toàn.
+       */
+
+      const padding = 8;
+
+
+      /*
+       * Giới hạn X.
+       *
+       * Vì left là tâm nút,
+       * phải chừa nửa chiều rộng.
+       */
+
+      const minX =
+        buttonWidth / 2 + padding;
+
+      const maxX =
+        areaWidth -
+        buttonWidth / 2 -
+        padding;
+
+
+      /*
+       * Giới hạn Y.
+       */
+
+      const minY =
+        buttonHeight / 2 + padding;
+
+      const maxY =
+        areaHeight -
+        buttonHeight / 2 -
+        padding;
+
+
+      /*
+       * Random vị trí.
+       */
+
+      const x =
+        minX +
+        Math.random() *
+        Math.max(
+          0,
+          maxX - minX
+        );
+
+
+      const y =
+        minY +
+        Math.random() *
+        Math.max(
+          0,
+          maxY - minY
+        );
+
+
+      /*
+       * Xoay nhẹ.
+       */
+
+      const rotation =
+        Math.floor(
+          Math.random() * 13
+        ) - 6;
+
+
+      /*
+       * Đặt vị trí.
+       */
+
+      noButton.style.left =
+        `${x}px`;
+
+      noButton.style.top =
+        `${y}px`;
+
+      noButton.style.transform =
+        `translate(-50%, -50%) rotate(${rotation}deg)`;
+
+    }
+
+
+    /* ==========================================
+       MOUSE
+       ========================================== */
+
+    noButton.addEventListener(
+      'mouseenter',
+      moveNoButton
+    );
+
+
+    /* ==========================================
+       FOCUS
+       ========================================== */
+
+    noButton.addEventListener(
+      'focus',
+      moveNoButton
+    );
+
+
+    /* ==========================================
+       TOUCH / CLICK
+       ========================================== */
+
+    noButton.addEventListener(
+      'pointerdown',
+
+      function(event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+      }
+    );
+
+
+    /* ==========================================
+       HEART
+       ========================================== */
+
+    function releaseHearts() {
+
+      const symbols = [
+        '❤️',
+        '💗',
+        '💕',
+        '💖',
+        '✨'
+      ];
+
+
+      for (
+        let index = 0;
+        index < 24;
+        index += 1
+      ) {
+
+        const heart =
+          document.createElement('span');
+
+
+        heart.className =
+          'heart';
+
+
+        heart.textContent =
+          symbols[
+            index % symbols.length
+          ];
+
+
+        heart.style.left =
+          `${45 + Math.random() * 10}%`;
+
+
+        heart.style.top =
+          `${48 + Math.random() * 8}%`;
+
+
+        heart.style.animationDelay =
+          `${Math.random() * .7}s`;
+
+
+        heart.style.fontSize =
+          `${18 + Math.random() * 18}px`;
+
+
+        document.body.appendChild(
+          heart
+        );
+
+
+        heart.addEventListener(
+          'animationend',
+          () => heart.remove()
+        );
+
+      }
+
+    }
+
+
+    /* ==========================================
+       NÚT THA LỖI
+       ========================================== */
+
+    yesButton.addEventListener(
+      'click',
+
+      function() {
+
+        apologyContent.classList.add(
+          'hidden'
+        );
+
+        successContent.classList.remove(
+          'hidden'
+        );
+
+        noButton.remove();
+
+        releaseHearts();
+
+
+        if (
+          typeof confetti === 'function'
+        ) {
+
+          confetti({
+
+            particleCount: 130,
+
+            spread: 90,
+
+            origin: {
+              y: .65
+            },
+
+            colors: [
+              '#f472b6',
+              '#fb7185',
+              '#2dd4bf',
+              '#facc15'
+            ]
+
+          });
+
+        }
+
+      }
+    );
+
+
+    /* ==========================================
+       KHI LOAD TRANG
+       
+       Đặt nút vào vị trí ban đầu chính xác.
+       ========================================== */
+
+    window.addEventListener(
+      'load',
+      function() {
+
+        /*
+         * Cho trình duyệt render xong
+         * rồi mới tính kích thước.
+         */
+
+        requestAnimationFrame(() => {
+
+          noButton.style.left = '50%';
+          noButton.style.top = '125px';
+          noButton.style.transform =
+            'translate(-50%, -50%)';
+
+        });
+
+      }
+    );
+
+
+  </script>
+
+</body>
+</html>
