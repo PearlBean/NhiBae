@@ -1,1195 +1,481 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lá thư cho Nhi</title>
 
-  <title>Nhi ơi, Sang xin lỗi mà!</title>
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['"Nunito"', 'sans-serif'],
-            hand: ['"Patrick Hand"', 'cursive']
-          },
-          colors: {
-            blush: '#fff1f5',
-            roseink: '#c7476d',
-            softpink: '#ffdbe7'
-          }
-        }
-      }
-    };
-  </script>
-
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Patrick+Hand&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Patrick+Hand&display=swap"
     rel="stylesheet"
-  >
+  />
 
   <style>
+    :root {
+      --bg-1: #fef7fb;
+      --bg-2: #f4fbf9;
+      --bg-3: #fffaf2;
+      --rose: #d96d8c;
+      --rose-deep: #c84d75;
+      --rose-soft: #f9dfe7;
+      --mint: #cdefe5;
+      --ink: #503f4d;
+      --muted: #6f6171;
+      --paper: #fffdfb;
+      --line: #f1dfe3;
+      --shadow: rgba(161, 102, 122, 0.18);
+    }
 
     * {
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html, body {
       margin: 0;
-      padding: 0;
       min-height: 100%;
     }
 
     body {
       min-height: 100vh;
-      overflow-x: hidden;
-
+      display: grid;
+      place-items: center;
+      padding: 28px 16px;
       background:
-        radial-gradient(
-          circle at 12% 18%,
-          rgba(255,255,255,.85) 0 5rem,
-          transparent 5.1rem
-        ),
-        radial-gradient(
-          circle at 88% 82%,
-          rgba(255,255,255,.75) 0 7rem,
-          transparent 7.1rem
-        ),
-        linear-gradient(
-          135deg,
-          #dff7f4 0%,
-          #fff0f5 48%,
-          #fff8e8 100%
-        );
-    }
-
-    /* ==========================================
-       BÓNG
-       ========================================== */
-
-    .paper-shadow {
-      box-shadow:
-        0 24px 70px rgba(177,111,132,.18),
-        0 5px 16px rgba(177,111,132,.08);
-    }
-
-    /* ==========================================
-       TRANG TRÍ
-       ========================================== */
-
-    .float {
-      animation: float 4s ease-in-out infinite;
-    }
-
-    .float-delay {
-      animation: float 4.8s .7s ease-in-out infinite;
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform:
-          translateY(0)
-          rotate(-4deg);
-      }
-
-      50% {
-        transform:
-          translateY(-10px)
-          rotate(4deg);
-      }
-
-    }
-
-    /* ==========================================
-       SUCCESS
-       ========================================== */
-
-    @keyframes pop {
-
-      0% {
-        transform: scale(.85);
-        opacity: 0;
-      }
-
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-
-    }
-
-    .success-state {
-      animation:
-        pop .45s
-        cubic-bezier(.2,.8,.2,1)
-        both;
-    }
-
-    /* ==========================================
-       BỨC THƯ RESPONSIVE
-       ========================================== */
-
-    #card {
-
+        radial-gradient(circle at 15% 10%, rgba(255, 211, 228, 0.92), transparent 28%),
+        radial-gradient(circle at 80% 75%, rgba(194, 240, 223, 0.88), transparent 26%),
+        radial-gradient(circle at 55% 20%, rgba(255, 255, 255, 0.9), transparent 20%),
+        linear-gradient(135deg, #fffafc 0%, #fceef4 32%, #edfaf6 68%, #fffaf2 100%);
+      color: var(--ink);
+      font-family: "Nunito", sans-serif;
       position: relative;
-
-      /*
-       * Chiều rộng tự co giãn.
-       */
-      width: min(
-        92vw,
-        590px
-      );
-
-      /*
-       * Không cố định chiều cao.
-       * Nội dung tự quyết định chiều cao.
-       */
-      min-height: 0;
-
-      /*
-       * Không bị tràn ngang.
-       */
-      overflow: visible;
-    }
-
-    /* ==========================================
-       ẢNH MÈO
-       ========================================== */
-
-    .cat-wrapper {
-
-      /*
-       * Desktop: 160px
-       * Mobile: tự nhỏ theo màn hình
-       */
-      width: clamp(
-        110px,
-        28vw,
-        160px
-      );
-
-      height: clamp(
-        110px,
-        28vw,
-        160px
-      );
-    }
-
-    /* ==========================================
-       KHU VỰC NÚT
-       ========================================== */
-
-    #buttonArea {
-
-      position: relative;
-
-      width: 100%;
-
-      /*
-       * Tự co theo màn hình.
-       *
-       * Desktop khoảng 190px
-       * Mobile khoảng 155px
-       */
-      height: clamp(
-        155px,
-        28vw,
-        190px
-      );
-
-      margin-top: clamp(
-        18px,
-        4vw,
-        28px
-      );
-
-      /*
-       * Không cho vùng nút tràn ngang.
-       */
       overflow: hidden;
-
-      border-radius: 25px;
     }
 
-    /* ==========================================
-       NÚT THA LỖI
-       ========================================== */
-
-    #yesButton {
-
+    body::before,
+    body::after {
+      content: "";
       position: absolute;
-
-      left: 50%;
-      top: 18px;
-
-      transform:
-        translateX(-50%);
-
-      z-index: 10;
-
-      white-space: nowrap;
-
-      /*
-       * Kích thước tự co.
-       */
-      padding:
-        clamp(10px, 2vw, 13px)
-        clamp(18px, 4vw, 26px);
-
-      font-size:
-        clamp(13px, 2.5vw, 16px);
-    }
-
-    /* ==========================================
-       NÚT KHÔNG ĐỒNG Ý
-       ========================================== */
-
-    #noButton {
-
-      position: absolute;
-
-      left: 50%;
-      top: 125px;
-
-      transform:
-        translate(-50%, -50%);
-
-      transition:
-        left .35s ease,
-        top .35s ease,
-        transform .35s ease;
-
-      z-index: 20;
-
-      white-space: nowrap;
-
-      /*
-       * Tự co.
-       */
-      padding:
-        clamp(8px, 1.8vw, 10px)
-        clamp(13px, 3vw, 17px);
-
-      font-size:
-        clamp(11px, 2.2vw, 14px);
-    }
-
-    /* ==========================================
-       TRÁI TIM
-       ========================================== */
-
-    .heart {
-
-      position: fixed;
-
+      inset: auto;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.7;
       pointer-events: none;
-
-      animation:
-        rise 2.2s ease-out forwards;
-
-      z-index: 100;
     }
 
-    @keyframes rise {
+    body::before {
+      width: 420px;
+      height: 420px;
+      left: -80px;
+      top: 60px;
+      background: rgba(255, 205, 221, 0.45);
+    }
 
-      0% {
-        opacity: 0;
+    body::after {
+      width: 460px;
+      height: 460px;
+      right: -80px;
+      bottom: 40px;
+      background: rgba(194, 240, 223, 0.42);
+    }
 
-        transform:
-          translateY(10px)
-          scale(.6)
-          rotate(0);
-      }
+    .scene {
+      position: relative;
+      width: min(95vw, 700px);
+      height: 620px;
+      display: grid;
+      place-items: center;
+      z-index: 1;
+    }
 
-      15% {
+    .scene::before,
+    .scene::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(38px);
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .scene::before {
+      width: 260px;
+      height: 260px;
+      background: rgba(255, 214, 232, 0.8);
+      left: 30px;
+      top: 70px;
+    }
+
+    .scene::after {
+      width: 220px;
+      height: 220px;
+      background: rgba(214, 245, 232, 0.8);
+      right: 20px;
+      bottom: 80px;
+    }
+
+    .envelope {
+      position: relative;
+      width: min(92vw, 620px);
+      height: 340px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.45s ease;
+    }
+
+    .envelope:hover {
+      transform: translateY(-2px);
+    }
+
+    .envelope-shell {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #f7e4eb 0%, #f4d9e3 100%);
+      border: 1px solid rgba(157, 99, 118, 0.12);
+      box-shadow: 0 26px 60px var(--shadow);
+      overflow: hidden;
+    }
+
+    .envelope-shell::before,
+    .envelope-shell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.28), transparent 42%);
+      pointer-events: none;
+    }
+
+    .envelope-shell::after {
+      inset: auto 24px 22px 24px;
+      height: 1px;
+      background: rgba(141, 92, 108, 0.3);
+    }
+
+    .envelope-header {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      z-index: 25;
+      color: var(--rose-deep);
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .envelope-header > span:first-child {
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    .envelope.open .envelope-header {
+      opacity: 0;
+      transform: translateY(-8px);
+      visibility: hidden;
+    }
+
+    .stamp {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 30% 30%, #ffd9e3 0%, #ffb7cb 35%, #ff93b8 70%, #f75a88 100%);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow:
+        0 0 0 4px rgba(255, 164, 196, 0.18),
+        0 8px 18px rgba(216, 75, 115, 0.22),
+        inset 0 2px 6px rgba(255,255,255,0.9);
+      font-size: 1.08rem;
+      position: relative;
+      z-index: 26;
+      transform: translateY(-1px);
+      color: #eb0a0a;
+      text-shadow: 0 2px 8px rgba(163, 31, 71, 0.35);
+      animation: heartPulse 2.2s ease-in-out infinite;
+      transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .stamp::before {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: rgba(255, 136, 182, 0.12);
+      z-index: -1;
+      animation: heartHalo 2.2s ease-in-out infinite;
+    }
+
+    .stamp:hover {
+      transform: translateY(-1px) scale(1.12);
+      filter: saturate(1.12);
+      box-shadow:
+        0 0 0 6px rgba(255, 164, 196, 0.18),
+        0 10px 22px rgba(216, 75, 115, 0.28),
+        inset 0 2px 8px rgba(255,255,255,0.95);
+    }
+
+    @keyframes heartPulse {
+      0%, 100% {
         opacity: 1;
+        transform: translateY(-1px) scale(1);
       }
-
-      100% {
-        opacity: 0;
-
-        transform:
-          translateY(-110px)
-          scale(1.25)
-          rotate(18deg);
+      25% {
+        opacity: 0.96;
+        transform: translateY(-1px) scale(1.06);
       }
-
+      55% {
+        opacity: 0.98;
+        transform: translateY(-1px) scale(1.03);
+      }
+      75% {
+        opacity: 0.9;
+        transform: translateY(-1px) scale(1.1);
+      }
     }
 
-    /* ==========================================
-       ĐIỆN THOẠI NHỎ
-       ========================================== */
-
-    @media (max-width: 480px) {
-
-      #card {
-        width: calc(100vw - 24px);
-        border-radius: 1.7rem;
+    @keyframes heartHalo {
+      0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.8;
       }
-
-      #buttonArea {
-        height: 155px;
+      50% {
+        transform: scale(1.12);
+        opacity: 0.5;
       }
-
-      #noButton {
-        top: 120px;
-      }
-
     }
 
-    /* ==========================================
-       ĐIỆN THOẠI RẤT NHỎ
-       ========================================== */
-
-    @media (max-width: 360px) {
-
-      #card {
-        width: calc(100vw - 16px);
-      }
-
-      #buttonArea {
-        height: 145px;
-      }
-
-      #noButton {
-        top: 112px;
-      }
-
+    .flap {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 52%;
+      background: linear-gradient(180deg, #f6dde7 0%, #efcfe0 100%);
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      transform-origin: top center;
+      z-index: 5;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: inset 0 -10px 20px rgba(192, 88, 121, 0.06);
     }
 
-    /* ==========================================
-       MÀN HÌNH THẤP
-       ========================================== */
-
-    @media (max-height: 700px) {
-
-      main {
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
-      }
-
-      #card {
-        padding-top: 28px !important;
-        padding-bottom: 28px !important;
-      }
-
-      .cat-wrapper {
-        margin-bottom: 20px !important;
-      }
-
-      #buttonArea {
-        height: 145px;
-      }
-
+    .flap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.06));
     }
 
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .letter {
+      position: absolute;
+      left: 50%;
+      top: 58%;
+      width: calc(100% - 54px);
+      max-width: 560px;
+      min-height: 230px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 35px rgba(122, 80, 92, 0.12);
+      transform: translate(-50%, -50%) scale(0.84);
+      opacity: 0;
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), top 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .letter::before,
+    .letter::after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 1px;
+      background: rgba(192, 148, 165, 0.2);
+      top: 0;
+    }
+
+    .letter::before {
+      left: 28px;
+    }
+
+    .letter::after {
+      right: 28px;
+    }
+
+    .envelope.open .letter {
+      top: 52%;
+      opacity: 1;
+      z-index: 10;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .letter-content {
+      position: relative;
+      z-index: 1;
+      padding: 28px 36px 24px;
+      text-align: left;
+    }
+
+    .letter-top {
+      display: inline-block;
+      font-family: "Patrick Hand", cursive;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      color: var(--rose-deep);
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .letter h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      line-height: 1.12;
+      color: var(--rose-deep);
+      font-weight: 900;
+    }
+
+    .letter p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.8;
+      font-weight: 600;
+    }
+
+    .letter .signature {
+      margin-top: 20px;
+      font-family: "Patrick Hand", cursive;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--rose-deep);
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+
+    .hint {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(90, 62, 72, 0.72);
+      font-weight: 800;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      z-index: 7;
+    }
+
+    .envelope.open + .hint {
+      opacity: 0;
+      transform: translateX(-50%) translateY(8px);
+    }
+
+    @media (max-width: 520px) {
+      .scene {
+        height: 560px;
+      }
+
+      .envelope {
+        height: 300px;
+      }
+
+      .letter {
+        width: calc(100% - 34px);
+        top: 61%;
+      }
+
+      .envelope.open .letter {
+        top: 55%;
+      }
+
+      .letter-content {
+        padding: 22px 22px 18px;
+      }
+
+      .envelope-header {
+        font-size: 0.66rem;
+        letter-spacing: 0.1em;
+      }
+    }
   </style>
 </head>
-
-
-<body class="font-display text-slate-700">
-
-  <!-- ==========================================
-       MAIN
-       ========================================== -->
-
-  <main
-    class="
-      relative
-      flex
-      min-h-screen
-      items-center
-      justify-center
-      px-3
-      py-6
-      sm:px-5
-      sm:py-10
-    "
-  >
-
-    <!-- Trang trí -->
-
-    <span
-      class="
-        float
-        absolute
-        left-[5%]
-        top-[13%]
-        select-none
-        text-3xl
-        opacity-70
-      "
-    >
-      ♡
-    </span>
-
-    <span
-      class="
-        float-delay
-        absolute
-        right-[7%]
-        top-[20%]
-        select-none
-        text-2xl
-        text-rose-300
-        opacity-80
-      "
-    >
-      ✦
-    </span>
-
-    <span
-      class="
-        float-delay
-        absolute
-        bottom-[14%]
-        left-[10%]
-        select-none
-        text-2xl
-        opacity-60
-      "
-    >
-      ♡
-    </span>
-
-    <span
-      class="
-        float
-        absolute
-        bottom-[11%]
-        right-[11%]
-        select-none
-        text-3xl
-        text-teal-300
-        opacity-70
-      "
-    >
-      ✿
-    </span>
-
-
-    <!-- ==========================================
-         BỨC THƯ
-         ========================================== -->
-
-    <section
-      id="card"
-      class="
-        paper-shadow
-        relative
-
-        rounded-[2rem]
-
-        border
-        border-white/80
-
-        bg-white/90
-
-        px-5
-        py-8
-
-        text-center
-
-        backdrop-blur
-
-        sm:px-10
-        sm:py-10
-      "
-    >
-
-      <!-- Thanh màu -->
-
-      <div
-        class="
-          absolute
-          inset-x-0
-          top-0
-          h-2
-
-          rounded-t-[2rem]
-
-          bg-gradient-to-r
-          from-teal-300
-          via-pink-300
-          to-amber-200
-        "
-      ></div>
-
-
-      <!-- ==========================================
-           GIF MÈO
-           ========================================== -->
-
-      <div
-        class="
-          cat-wrapper
-
-          mx-auto
-          mb-6
-
-          flex
-          items-center
-          justify-center
-
-          overflow-hidden
-
-          rounded-full
-
-          border-8
-          border-pink-50
-
-          bg-pink-50
-
-          shadow-inner
-        "
-      >
-
-        <img
-          class="
-            h-full
-            w-full
-            object-cover
-          "
-
-          src="https://media.tenor.com/2roX3uxz_68AAAAC/cat-crying.gif"
-
-          alt="Một chú mèo hoạt hình đang rơi nước mắt xin lỗi"
-
-          onerror="
-            this.style.display='none';
-            this.nextElementSibling.style.display='block';
-          "
-        >
-
-        <span
-          class="
-            hidden
-            text-6xl
-            sm:text-7xl
-          "
-          aria-hidden="true"
-        >
-          🥺
-        </span>
-
+<body>
+  <div class="scene">
+    <div class="envelope" id="envelope" aria-label="Mở bức thư" tabindex="0" role="button">
+      <div class="envelope-header">
+        <span>Gửi Nhi</span>
+        <span class="stamp" aria-label="Yêu thương">❤</span>
       </div>
 
+      <div class="envelope-shell">
+        <div class="flap" aria-hidden="true"></div>
+      </div>
 
-      <!-- ==========================================
-           NỘI DUNG
-           ========================================== -->
+      <article class="letter" aria-live="polite">
+        <div class="letter-content">
+          <!-- <span class="letter-top">Một lá thư nhắn gửi</span> -->
+          <h1>Nhi ơi,</h1>
 
-      <div id="apologyContent">
+          <p>
+            Sang có đôi điều muốn nói người sang yêu.
+          </p>
 
-        <!-- Tiêu đề nhỏ -->
+          <p>
+            1. Sang biết có những chuyện Nhi có thể tự làm được, nhưng có thể hãy để Sang làm.
+            Sang muốn có thể làm những thứ nhỏ nhất cho Nhi. Giờ có Sang rồi, Nhi hong cần phải 
+            cố gắng một mình nữa đâu. Nhi gặp chuyện gì buồn, làm Nhi hong vui thì Nhi cứ
+            tâm sự với Sang. Sang hong thấy phiền đâu. Có thể Sang hong biết cách an ủi, 
+            nhưng Sang luôn sẵn sàng lắng nghe để Nhi hong phải cô đơn một mình đâu.
+          </p>
 
-        <p
-          class="
-            mb-2
+          <p>
+            2. Hôm qua tự nhiên Nhi nói "tự nhiên có ngyeu cái ko được đi" làm Sang hơi có chút chạnh lòng.
+            Đúng là Sang thích đánh cầu lông thiệc, nhưng Sang thích Nhi hơn. Cầu lông thì Sang sắp xếp hôm nào
+            đánh cũng được. Còn đi chơi với Nhi thì lâu lâu mới có dịp. Sang nhắn tụi nó tuần này Sang hong đánh
+            thứ 6 và thứ 7 rùi. Nên là thứ 6 này trung thu, Nhi rảnh thì đi chơi với Sang nha. Còn thứ 7 thì tuỳ ý Nhi 
+            quyết định nhen. 
+          </p>
 
-            font-hand
-
-            text-lg
-            sm:text-xl
-
-            text-rose-400
-          "
-        >
-          Một lá thư nhỏ gửi Nhi
-        </p>
-
-
-        <!-- Tiêu đề -->
-
-        <h1
-          class="
-            mx-auto
-
-            max-w-lg
-
-            text-[clamp(28px,7vw,44px)]
-
-            font-black
-
-            leading-[1.1]
-
-            text-roseink
-          "
-        >
-          Nhi ơi, Sang xin lỗi mà! 🥺
-        </h1>
-
-
-        <!-- Nội dung -->
-
-        <p
-          class="
-            mx-auto
-
-            mt-5
-            sm:mt-6
-
-            max-w-lg
-
-            text-[clamp(15px,3.5vw,18px)]
-
-            font-semibold
-
-            leading-7
-            sm:leading-8
-
-            text-slate-500
-          "
-        >
-          Sang vụng ăn nói qua tin nhắn quá làm Nhi buồn.
-          Sang hong cố ý đâu, Nhi đừng giận Sang nữa nha!
-          Sang sẽ cố gắng nhắn tin ổn hơn để Nhi vui nha ♡
-        </p>
-
-
-        <!-- ==========================================
-             TIẾNG TRUNG
-             ========================================== -->
-
-        <p
-          class="
-            mt-6
-            sm:mt-7
-
-            font-hand
-
-            text-[clamp(28px,7vw,36px)]
-
-            text-teal-500
-          "
-        >
-
-          对不起
-
-          <span
-            class="
-              text-[clamp(16px,4vw,20px)]
-              text-slate-400
-            "
-          >
-            (Duìbuqǐ)
-          </span>
-
-        </p>
-
-
-        <!-- ==========================================
-             KHU VỰC NÚT
-             ========================================== -->
-
-        <div id="buttonArea">
-
-          <!-- NÚT THA LỖI -->
-
-          <button
-            id="yesButton"
-
-            type="button"
-
-            class="
-              rounded-full
-
-              bg-roseink
-
-              font-extrabold
-              text-white
-
-              shadow-lg
-              shadow-rose-200
-
-              transition
-
-              hover:-translate-y-1
-              hover:bg-rose-600
-              hover:shadow-xl
-
-              focus:outline-none
-              focus:ring-4
-              focus:ring-pink-200
-            "
-          >
-            Tha lỗi cho Sang ❤️
-          </button>
-
-
-          <!-- NÚT KHÔNG ĐỒNG Ý -->
-
-          <button
-            id="noButton"
-
-            type="button"
-
-            class="
-              rounded-full
-
-              border-2
-              border-slate-200
-
-              bg-white
-
-              font-bold
-              text-slate-500
-
-              shadow-sm
-
-              transition
-
-              hover:border-pink-200
-              hover:bg-pink-50
-            "
-          >
-            Không đồng ý 😢
-          </button>
-
+          <div class="signature">Sang thương Nhi nhiều lắm ♡</div>
         </div>
+      </article>
+    </div>
 
-
-        <!-- ==========================================
-             LỜI HỨA
-             ========================================== -->
-
-        <p
-          class="
-            mt-1
-
-            text-[11px]
-            sm:text-xs
-
-            font-semibold
-
-            text-slate-400
-          "
-        >
-          Sang hứa sẽ nói chuyện dịu dàng hơn đó ♡
-        </p>
-
-      </div>
-
-
-      <!-- ==========================================
-           SUCCESS
-           ========================================== -->
-
-      <div
-        id="successContent"
-
-        class="
-          success-state
-          hidden
-
-          py-10
-          sm:py-12
-        "
-      >
-
-        <div
-          class="
-            mb-5
-            text-6xl
-            sm:text-7xl
-          "
-        >
-          🥰
-        </div>
-
-
-        <h2
-          class="
-            text-3xl
-            font-black
-            leading-tight
-            text-roseink
-          "
-        >
-          Yayyy!
-        </h2>
-
-
-        <p
-          class="
-            mx-auto
-            mt-4
-
-            max-w-sm
-
-            text-base
-            sm:text-lg
-
-            font-bold
-
-            leading-7
-            sm:leading-8
-
-            text-slate-500
-          "
-        >
-          Cảm ơn Nhi nhìu nhìu 🥰
-          <br>
-          Để Sang bù đắp cho Nhi nha!
-        </p>
-
-
-        <p
-          class="
-            mt-6
-
-            font-hand
-
-            text-xl
-            sm:text-2xl
-
-            text-teal-500
-          "
-        >
-          Thương Nhi nhiều lắm ♡
-        </p>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- ==========================================
-       CONFETTI
-       ========================================== -->
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"
-  ></script>
-
+    <div class="hint">Click để mở thư</div>
+  </div>
 
   <script>
+    const envelope = document.getElementById('envelope');
 
-    const buttonArea =
-      document.getElementById('buttonArea');
-
-    const yesButton =
-      document.getElementById('yesButton');
-
-    const noButton =
-      document.getElementById('noButton');
-
-    const apologyContent =
-      document.getElementById('apologyContent');
-
-    const successContent =
-      document.getElementById('successContent');
-
-
-    /* ==========================================
-       NÚT KHÔNG ĐỒNG Ý NÉ
-       ========================================== */
-
-    function moveNoButton() {
-
-      /*
-       * Lấy kích thước thật của vùng nút.
-       */
-
-      const areaWidth =
-        buttonArea.clientWidth;
-
-      const areaHeight =
-        buttonArea.clientHeight;
-
-
-      /*
-       * Kích thước thật của nút.
-       */
-
-      const buttonWidth =
-        noButton.offsetWidth;
-
-      const buttonHeight =
-        noButton.offsetHeight;
-
-
-      /*
-       * Khoảng cách an toàn.
-       */
-
-      const padding = 8;
-
-
-      /*
-       * Giới hạn X.
-       *
-       * Vì left là tâm nút,
-       * phải chừa nửa chiều rộng.
-       */
-
-      const minX =
-        buttonWidth / 2 + padding;
-
-      const maxX =
-        areaWidth -
-        buttonWidth / 2 -
-        padding;
-
-
-      /*
-       * Giới hạn Y.
-       */
-
-      const minY =
-        buttonHeight / 2 + padding;
-
-      const maxY =
-        areaHeight -
-        buttonHeight / 2 -
-        padding;
-
-
-      /*
-       * Random vị trí.
-       */
-
-      const x =
-        minX +
-        Math.random() *
-        Math.max(
-          0,
-          maxX - minX
-        );
-
-
-      const y =
-        minY +
-        Math.random() *
-        Math.max(
-          0,
-          maxY - minY
-        );
-
-
-      /*
-       * Xoay nhẹ.
-       */
-
-      const rotation =
-        Math.floor(
-          Math.random() * 13
-        ) - 6;
-
-
-      /*
-       * Đặt vị trí.
-       */
-
-      noButton.style.left =
-        `${x}px`;
-
-      noButton.style.top =
-        `${y}px`;
-
-      noButton.style.transform =
-        `translate(-50%, -50%) rotate(${rotation}deg)`;
-
+    function toggleEnvelope() {
+      envelope.classList.toggle('open');
     }
 
-
-    /* ==========================================
-       MOUSE
-       ========================================== */
-
-    noButton.addEventListener(
-      'mouseenter',
-      moveNoButton
-    );
-
-
-    /* ==========================================
-       FOCUS
-       ========================================== */
-
-    noButton.addEventListener(
-      'focus',
-      moveNoButton
-    );
-
-
-    /* ==========================================
-       TOUCH / CLICK
-       ========================================== */
-
-    noButton.addEventListener(
-      'pointerdown',
-
-      function(event) {
-
+    envelope.addEventListener('click', toggleEnvelope);
+    envelope.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-
-        moveNoButton();
-
+        toggleEnvelope();
       }
-    );
-
-
-    /* ==========================================
-       HEART
-       ========================================== */
-
-    function releaseHearts() {
-
-      const symbols = [
-        '❤️',
-        '💗',
-        '💕',
-        '💖',
-        '✨'
-      ];
-
-
-      for (
-        let index = 0;
-        index < 24;
-        index += 1
-      ) {
-
-        const heart =
-          document.createElement('span');
-
-
-        heart.className =
-          'heart';
-
-
-        heart.textContent =
-          symbols[
-            index % symbols.length
-          ];
-
-
-        heart.style.left =
-          `${45 + Math.random() * 10}%`;
-
-
-        heart.style.top =
-          `${48 + Math.random() * 8}%`;
-
-
-        heart.style.animationDelay =
-          `${Math.random() * .7}s`;
-
-
-        heart.style.fontSize =
-          `${18 + Math.random() * 18}px`;
-
-
-        document.body.appendChild(
-          heart
-        );
-
-
-        heart.addEventListener(
-          'animationend',
-          () => heart.remove()
-        );
-
-      }
-
-    }
-
-
-    /* ==========================================
-       NÚT THA LỖI
-       ========================================== */
-
-    yesButton.addEventListener(
-      'click',
-
-      function() {
-
-        apologyContent.classList.add(
-          'hidden'
-        );
-
-        successContent.classList.remove(
-          'hidden'
-        );
-
-        noButton.remove();
-
-        releaseHearts();
-
-
-        if (
-          typeof confetti === 'function'
-        ) {
-
-          confetti({
-
-            particleCount: 130,
-
-            spread: 90,
-
-            origin: {
-              y: .65
-            },
-
-            colors: [
-              '#f472b6',
-              '#fb7185',
-              '#2dd4bf',
-              '#facc15'
-            ]
-
-          });
-
-        }
-
-      }
-    );
-
-
-    /* ==========================================
-       KHI LOAD TRANG
-       
-       Đặt nút vào vị trí ban đầu chính xác.
-       ========================================== */
-
-    window.addEventListener(
-      'load',
-      function() {
-
-        /*
-         * Cho trình duyệt render xong
-         * rồi mới tính kích thước.
-         */
-
-        requestAnimationFrame(() => {
-
-          noButton.style.left = '50%';
-          noButton.style.top = '125px';
-          noButton.style.transform =
-            'translate(-50%, -50%)';
-
-        });
-
-      }
-    );
-
-
+    });
   </script>
-
 </body>
 </html>
